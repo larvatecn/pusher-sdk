@@ -36,12 +36,18 @@ $res = $forge->publish('6557749ee6d95#32131','event', ['name'=>'张三']);
 
 ```php
 $res = $forge->trigger('room1','event', ['name'=>'张三']);
+
+//或者
+
+$channel = $forge->channel('room1');
+$channel->trigger('event', ['name'=>'张三']);
 ```
 
 查询频道在线人数：
 
 ```php
-$res = $forge->getOnlineUsers('room1');
+$channel = $forge->channel('room1');
+$channel->online_users;
 ```
 
 ## License

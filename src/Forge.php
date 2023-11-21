@@ -3,6 +3,7 @@
 namespace Larva\Pusher;
 
 use GuzzleHttp\Client as HttpClient;
+use Larva\Pusher\Resources\Channel;
 use Larva\Pusher\Resources\OnlineUser;
 
 class Forge
@@ -120,12 +121,12 @@ class Forge
     }
 
     /**
-     * 点对点发布事件
+     * 直接发布点对点事件
      * @param string $sid
      * @param string $event
      * @param string|array $data
      */
-    public function publish($sid, $event, $data)
+    public function publish(string $sid, string $event, $data)
     {
         return $this->post('/api/publish', [
             'sid' => $sid,
@@ -135,13 +136,13 @@ class Forge
     }
 
     /**
-     * 发布事件
+     * 直接发布事件
      * @param string $channel
      * @param string $event
      * @param string|array $data
      * @return mixed
      */
-    public function trigger($channel, $event, $data)
+    public function trigger(string $channel, string $event, $data)
     {
         return $this->post('/api/publish', [
             'channel' => $channel,
@@ -151,13 +152,13 @@ class Forge
     }
 
     /**
-     * 获取频道在线人数
+     * 查询频道信息
      * @param string $channel
      */
-    public function getOnlineUsers($channel): OnlineUser
+    public function channel(string $channel): Channel
     {
-        return new OnlineUser($this->post('/api/online-users', [
-            'channel' => $channel,
-        ]), $this);
+        return new Channel($this->post('/api/channel', [
+                'channel' => $channel,
+            ]), $this);
     }
 }

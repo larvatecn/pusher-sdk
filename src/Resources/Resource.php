@@ -12,20 +12,20 @@ class Resource
      *
      * @var array
      */
-    public $attributes;
+    public array $attributes;
 
     /**
      * The Forge SDK instance.
      *
-     * @var \Larva\Pusher\Forge|null
+     * @var Forge|null
      */
-    protected $forge;
+    protected ?Forge $forge;
 
     /**
      * Create a new resource instance.
      *
      * @param  array  $attributes
-     * @param  \Larva\Pusher\Forge|null  $forge
+     * @param Forge|null  $forge
      * @return void
      */
     public function __construct(array $attributes, Forge $forge = null)
@@ -41,7 +41,7 @@ class Resource
      *
      * @return void
      */
-    protected function fill()
+    protected function fill(): void
     {
         foreach ($this->attributes as $key => $value) {
             $key = $this->camelCase($key);
@@ -73,11 +73,11 @@ class Resource
      * Transform the items of the collection to the given class.
      *
      * @param  array  $collection
-     * @param  string  $class
+     * @param string $class
      * @param  array  $extraData
      * @return array
      */
-    protected function transformCollection(array $collection, $class, array $extraData = []): array
+    protected function transformCollection(array $collection, string $class, array $extraData = []): array
     {
         return array_map(function ($data) use ($class, $extraData) {
             return new $class($data + $extraData, $this->forge);
