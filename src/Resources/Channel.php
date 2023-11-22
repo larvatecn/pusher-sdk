@@ -25,10 +25,10 @@ class Channel extends Resource
     /**
      * 向频道广播
      * @param string $event
-     * @param string|array $data
+     * @param array|string $data
      * @return mixed
      */
-    public function trigger($event, $data)
+    public function trigger(string $event, array|string $data)
     {
         return $this->forge->trigger($this->channel, $event, $data);
     }
