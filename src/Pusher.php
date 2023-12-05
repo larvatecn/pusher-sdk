@@ -8,6 +8,10 @@ namespace Larva\Pusher;
 
 use Illuminate\Support\Facades\Facade;
 
+/**
+ * @mixin Forge
+ * @author Tongle Xu <xutongle@msn.com>
+ */
 class Pusher extends Facade
 {
     /**
