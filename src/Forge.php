@@ -36,7 +36,7 @@ class Forge
      *
      * @var int
      */
-    public $timeout = 30;
+    public int $timeout = 30;
 
     /**
      * Create a new Forge instance.
@@ -103,7 +103,7 @@ class Forge
      * @param int $timeout
      * @return $this
      */
-    public function setTimeout($timeout)
+    public function setTimeout(int $timeout)
     {
         $this->timeout = $timeout;
 
@@ -115,9 +115,20 @@ class Forge
      *
      * @return int
      */
-    public function getTimeout()
+    public function getTimeout(): int
     {
         return $this->timeout;
+    }
+
+    /**
+     * 获取 WS 地址
+     * @return string
+     * @author Tongle Xu <xutongle@msn.com>
+     * @date 2023/12/5 18:19
+     */
+    public function getWsAddress(): string
+    {
+        return str_replace('http', 'ws', $this->baseUrl);
     }
 
     /**
@@ -158,7 +169,7 @@ class Forge
     public function channel(string $channel): Channel
     {
         return new Channel($this->post('/api/channel', [
-                'channel' => $channel,
-            ]), $this);
+            'channel' => $channel,
+        ]), $this);
     }
 }
